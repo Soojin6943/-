@@ -29,6 +29,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation 'org.junit.jupiter:junit-jupiter'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// 템플릿을 위한 타임리프 사용
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
 tasks.named('test') {
