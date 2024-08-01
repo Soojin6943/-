@@ -10,7 +10,7 @@
 		<!-- 타임리프는 Model 객체에 저장한 questionList를 ${questionList}로 읽을 수 있다. 위의 코드는 questionList에 저장된 데이터를 하나씩 꺼내 question 변수에 대입한 후 questionList의 개수만큼 반복하며 <tr> ... </tr> 문장을 출력하라는 의미이다. -->
 		<tr th:each="question : ${questionList}">
 			<td th:text="${question.subject}"></td>
-			<td [[${question.createDate}]]></td> <!-- 위에 text랑 같은 방법 -->
+			<td th:text="${question.createDate}"></td> <!-- 위에 text랑 같은 방법 -->
 		</tr>
 	</tbody>
 </table>
