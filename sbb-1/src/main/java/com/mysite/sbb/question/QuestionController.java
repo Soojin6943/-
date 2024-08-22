@@ -6,17 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 //import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-
+@RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
 public class QuestionController {
 	
 	private final QuestionService questionService;
 	
-	@GetMapping("/question/list")
+	@GetMapping("/list")
 //	@ResponseBody
 	public String list(Model model) {
 		List<Question> questionList = this.questionService.getList();
@@ -26,7 +28,7 @@ public class QuestionController {
 		return "question_list";
 	}
 	
-	@GetMapping(value = "/question/detail/{id}")
+	@GetMapping(value = "/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		// service에서 가져오고 controller에서 선언?하고 모델로 해서 템플릿 간 연결 후 사용?
 		
