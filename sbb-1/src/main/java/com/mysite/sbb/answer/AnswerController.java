@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @RequestMapping("/answer")
 @RequiredArgsConstructor
@@ -19,12 +21,16 @@ public class AnswerController {
 	private final AnswerService answerService;
 	
 	@PostMapping("/create/{id}")
-	public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String content) {
+	public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult) {
 		// @RequestParam(value="content") String content가 추가된 이유 -> 템플릿 question_detail.html에서 답변으로 입력한 내용(content)을 얻으려고 추가(textarea의 name 속성명이 content라서 변수명을 content로 설정)
 		Question question = this.questionService.getQuestion(id);
 		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("question", question);
+			return "question_detail";
+		}
 		// 답볍을 저장한다.
-		this.answerService.create(question, content);
+		this.answerService.create(question, answerForm.getContent());
 		
 		return String.format("redirect:/question/detail/%s", id);
 	}

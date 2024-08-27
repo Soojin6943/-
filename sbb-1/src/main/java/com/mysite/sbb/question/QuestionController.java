@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.mysite.sbb.answer.AnswerForm;
 
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
@@ -34,7 +35,7 @@ public class QuestionController {
 	}
 	
 	@GetMapping(value = "/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
 		// service에서 가져오고 controller에서 선언?하고 모델로 해서 템플릿 간 연결 후 사용?
 		
 		Question question = this.questionService.getQuestion(id);
