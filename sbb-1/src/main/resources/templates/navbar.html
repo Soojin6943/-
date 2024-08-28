@@ -1,0 +1,16 @@
+<!-- 사실 분리해서 안해도 됨. 유지보수에 편안함을 위해 독립된 템플릿으로 관리 -->
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">SBB</a>
+		<buttom class="navbar-toggler" type="buttom" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</buttom>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="#">로그인</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
