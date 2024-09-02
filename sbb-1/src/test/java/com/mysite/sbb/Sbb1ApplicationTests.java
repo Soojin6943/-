@@ -13,16 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mysite.sbb.question.Question;
-import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 
 @SpringBootTest
 class Sbb1ApplicationTests {
 	
-	@Autowired
-	private QuestionRepository questionRepository;
-
-	@Test
-	void testJpa() {
+//	@Autowired
+//	private QuestionRepository questionRepository;
+//
+//	@Test
+//	void testJpa() {
 //		Question q1 = new Question();
 //		q1.setSubject("sbb가 무엇인가요?");
 //		q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -48,12 +48,24 @@ class Sbb1ApplicationTests {
 		
 		// findById 메서드 : id의 값을 활용해 데이터를 조회
 		
-		Optional<Question> oq = this.questionRepository.findById(1);
-		if(oq.isPresent()) {
-			Question q = oq.get();
-			assertEquals("sbb가 무엇인가요?",q.getSubject());
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		if(oq.isPresent()) {
+//			Question q = oq.get();
+//			assertEquals("sbb가 무엇인가요?",q.getSubject());
+//		}
+//		
+//	}
+	
+	@Autowired
+	private QuestionService questionService;
+	
+	@Test
+	void testJpa() {
+		for(int i=1; i<=300; i++) {
+			String subject = String.format("테스트 데이터입니다:[%03d]", i);
+			String content = "내용무";
+			this.questionService.create(subject, content);
 		}
-		
 	}
 
 }
