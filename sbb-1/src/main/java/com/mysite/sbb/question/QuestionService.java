@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 import com.mysite.sbb.DataNotFoundException;
 
+import java.util.ArrayList;
+import org.springframework.data.domain.Sort;
 
 
 @RequiredArgsConstructor
@@ -44,7 +46,9 @@ public class QuestionService {
 	}
 	
 	public Page<Question> getList(int page) {
-		Pageable pageable = PageRequest.of(page, 10);
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("createDate"));
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		return this.questionRepository.findAll(pageable);
 	}
 
