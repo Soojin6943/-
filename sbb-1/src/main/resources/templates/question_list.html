@@ -11,7 +11,7 @@
 			<!--th: 이거는 타임리프에서 사용하는 속성임을 나타냄. 이 부분이 자바코드와 연결 -->
 			<!-- 타임리프는 Model 객체에 저장한 questionList를 ${questionList}로 읽을 수 있다. 위의 코드는 questionList에 저장된 데이터를 하나씩 꺼내 question 변수에 대입한 후 questionList의 개수만큼 반복하며 <tr> ... </tr> 문장을 출력하라는 의미이다. -->
 			<tr th:each="question, loop : ${paging}">
-				<td th:text="${loop.count}"></td>
+				<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
 				<td>
 					<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
 				</td> <!-- 상세페이지 url 연결 위해 타임리프의 th:href 속성 사용 (이때 url은 반드시 @{}에 입력해야함 + 링크 좌우에 | 입력 안하면 오류 발생. 타임 리프에서 ${}와 같은 자바 객체의 값을 더할 때는 반드시 |로 좌우를 감싸 주어야 함.) -->
