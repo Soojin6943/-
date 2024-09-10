@@ -7,7 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
-
+// PasswordEncoder 빈을 만들기 위해
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 // 스프링의 환경 설정 파일임을 의미하는 애너테이션 
 @Configuration
@@ -26,7 +28,11 @@ public class SecurityConfig {
 		;
 		return http.build();
 		
+	}
 		
+		@Bean
+		PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
 		
 	}
 	
