@@ -34,8 +34,8 @@ public class UserController {
 			bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
 			return "signup_form";
 		}
-		
-		try {
+		// 500 페이지 수
+		try { 
 			userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
 
 		} catch (DataIntegrityViolationException e) {
