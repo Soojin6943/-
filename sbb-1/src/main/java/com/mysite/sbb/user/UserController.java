@@ -52,4 +52,10 @@ public class UserController {
 		return "redirect:/";
 		
 	}
+	
+	// @PostMapping 방식의 로그인 메서드는 스프링 시큐리티가 대신 처리함. 내가 할 필요 ㄴ
+	@GetMapping("/login")
+	public String login() {
+		return "login_form";
+	}
 }

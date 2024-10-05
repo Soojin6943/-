@@ -11,6 +11,10 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+//로그인
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+
 // 스프링의 환경 설정 파일임을 의미하는 애너테이션 
 @Configuration
 // 모든 요청 URL이 스프링 시큐리티의 제어를 받도록 만드는 애너테이션 
@@ -25,16 +29,28 @@ public class SecurityConfig {
 		.csrf((csrf) -> csrf .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
 		// H2 콘솔 화면 적용? 
 		.headers((headers) -> headers .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+		// .formLogin은 스프링 시큐리티의 로그인 설정을 담당 + url은 /user/login + 로그인 성공 시 이동 페이지는 / 루트 url
+		.formLogin((formLogin) -> formLogin
+			.loginPage("/user/login")
+			.defaultSuccessUrl("/"))
+		.logout((logout) -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true))
 		;
 		return http.build();
 		
 	}
 		
-		@Bean
-		PasswordEncoder passwordEncoder() {
-			return new BCryptPasswordEncoder();
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 		
 	}
 	
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
 }
